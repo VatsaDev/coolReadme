@@ -20,8 +20,11 @@ async function test() {
 async function fetchReadme() {
   fetch('https://raw.githubusercontent.com/VatsaDev/VatsaDev/main/README.md')
     .then((response) => response.text())
-    .then((result) => (data = `{"text":${result}}`));
+    .then((result) => {
+      data = `{"text":${result}}`;
+      console.log(result);
+      test();
+    });
 }
 
 fetchReadme();
-test();
