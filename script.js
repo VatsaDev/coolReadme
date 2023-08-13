@@ -1,4 +1,6 @@
+const queryString = window.location.search;
 var converter = new showdown.Converter();
+const urlParams = new URLSearchParams(queryString);
 
 function convert(text) {
   var html = converter.makeHtml(text);
@@ -7,7 +9,8 @@ function convert(text) {
 }
 
 async function fetchReadme() {
-  fetch('https://raw.githubusercontent.com/VatsaDev/VatsaDev/main/README.md')
+  const u = urlParams.get('u');
+  fetch(`https://raw.githubusercontent.com/${u}/${u}/master/README.md`)
     .then((response) => response.text())
     .then((result) => {
       convert(result);
