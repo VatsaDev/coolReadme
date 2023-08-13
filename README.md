@@ -1,3 +1,3 @@
-# coolMD
+# coolReadme
 
 Better looking profile mds
