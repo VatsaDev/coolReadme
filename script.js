@@ -1,7 +1,7 @@
 var converter = new showdown.Converter();
 
 function convert(text) {
-  html = converter.makeHtml(text);
+  var html = converter.makeHtml(text);
   console.log(html);
 }
 
