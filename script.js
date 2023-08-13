@@ -3,6 +3,7 @@ var converter = new showdown.Converter();
 function convert(text) {
   var html = converter.makeHtml(text);
   console.log(html);
+  document.getElementById('content').innerHTML = html;
 }
 
 async function fetchReadme() {
