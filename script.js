@@ -17,13 +17,17 @@ async function test() {
   console.log(text);
 }
 
+var converter = new showdown.Converter(),
+  text = '# hello, markdown!',
+  html = converter.makeHtml(text);
+console.log(html);
+
 async function fetchReadme() {
   fetch('https://raw.githubusercontent.com/VatsaDev/VatsaDev/main/README.md')
     .then((response) => response.text())
     .then((result) => {
       data = `{"text":${result}}`;
       console.log(result);
-      test();
     });
 }
 
