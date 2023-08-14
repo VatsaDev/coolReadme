@@ -2,29 +2,11 @@ const queryString = window.location.search;
 var converter = new showdown.Converter();
 const urlParams = new URLSearchParams(queryString);
 const u = urlParams.get('u');
+const style = urlParams.get('style');
 
 function setup() {
   document.getElementById('userName').innerHTML = `@${u}`;
 }
-
-async function githubConvert(data) {
-  const response = await fetch('https://api.github.com/markdown', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/vnd.github+json',
-      'X-GitHub-Api-Version': '2022-11-28',
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: `{"text":${data}}`,
-  });
-  console.log(response.text());
-}
-
-githubConvert('Hello **world**');
-
-const text = await response.text();
-
-console.log(text);
 
 function convert(text) {
   var html = converter.makeHtml(text);
@@ -49,3 +31,11 @@ async function fetchReadme() {
 
 setup();
 fetchReadme();
+
+function addStyle(styleString) {
+  const style = document.createElement('style');
+  style.textContent = styleString;
+  document.head.append(style);
+}
+
+addStyle(style);
