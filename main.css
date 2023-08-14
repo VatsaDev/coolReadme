@@ -58,6 +58,8 @@ footer {
   padding: 10px;
   background-color: #cac4c4;
   color: #000;
+  border: none;
+  border-radius: 10px;
 }
 
 #send {
