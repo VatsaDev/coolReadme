@@ -49,12 +49,11 @@
         enableSnippets: true,
         enableLiveAutocompletion: true,
       });
-    </script>
-    <script>
+
       function iframeUpdate() {
         document.getElementById('view').src = `/page.html?u=${
           document.getElementById('userInput').innerHTML
-        }&style=${document.getElementById('cssEdit').innerHTML}`;
+        }&style=${editorcss.getValue()}`;
       }
     </script>
   </body>
