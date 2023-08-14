@@ -11,7 +11,51 @@
       referrerpolicy="no-referrer"
     ></script>
     <link rel="stylesheet" href="default.css" />
+    <link rel="stylesheet" href="editor.css" />
     <link rel="shortcut icon" href="markdown.svg" type="image/x-icon" />
+    <!--ACE-->
+    <script src="https://rawgithub.com/ajaxorg/ace-builds/master/src/ace.js"></script>
+    <script
+      src="https://rawgithub.com/ajaxorg/ace-builds/master/src/ext-emmet.js"
+      defer
+    ></script>
+    <script
+      src="https://rawgit.com/ajaxorg/ace-builds/master/src/ext-language_tools.js"
+      defer
+    ></script>
+    <script
+      src="https://rawgithub.com/nightwing/emmet-core/master/emmet.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"
+      integrity="sha512-GZ1RIgZaSc8rnco/8CXfRdCpDxRCphenIiZ2ztLy3XQfCbQUSCuk8IudvNHxkRA3oUg6q0qejgN/qqyG1duv5Q=="
+      crossorigin="anonymous"
+    ></script>
   </head>
-  <body></body>
+  <body>
+    <div id="userbar">
+      Username: <u><span id="userInput" contenteditable>Example</span></u>
+    </div>
+    <div id="cssEdit" onkeyup="iframeUpdate()"></div>
+    <iframe id="view" src="" title="page preview"></iframe>
+    <script>
+      var editorcss = ace.edit('cssEdit');
+      editorcss.setTheme('ace/theme/monokai');
+      editorcss.session.setMode('ace/mode/css');
+      editorcss.setOption('enableEmmet', true);
+      editorcss.setOptions({
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true,
+      });
+    </script>
+    <script>
+      function iframeUpdate() {
+        document.getElementById('view').src = `/page.html?u=${
+          document.getElementById('userInput').innerHTML
+        }&style=${document.getElementById('cssEdit').innerHTML}`;
+      }
+    </script>
+  </body>
 </html>
