@@ -13,25 +13,7 @@
     <link rel="stylesheet" href="default.css" />
     <link rel="stylesheet" href="editor.css" />
     <link rel="shortcut icon" href="markdown.svg" type="image/x-icon" />
-    <!--ACE-->
-    <script src="https://rawgithub.com/ajaxorg/ace-builds/master/src/ace.js"></script>
-    <script
-      src="https://rawgithub.com/ajaxorg/ace-builds/master/src/ext-emmet.js"
-      defer
-    ></script>
-    <script
-      src="https://rawgit.com/ajaxorg/ace-builds/master/src/ext-language_tools.js"
-      defer
-    ></script>
-    <script
-      src="https://rawgithub.com/nightwing/emmet-core/master/emmet.js"
-      defer
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"
-      integrity="sha512-GZ1RIgZaSc8rnco/8CXfRdCpDxRCphenIiZ2ztLy3XQfCbQUSCuk8IudvNHxkRA3oUg6q0qejgN/qqyG1duv5Q=="
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://unpkg.com/monaco-editor@latest/min/vs/loader.js"></script>
   </head>
   <body>
     <div id="userbar">
@@ -40,20 +22,42 @@
     <div id="cssEdit" onkeyup="iframeUpdate()"></div>
     <iframe id="view" src="" title="page preview"></iframe>
     <script>
-      var editorcss = ace.edit('cssEdit');
-      editorcss.setTheme('ace/theme/monokai');
-      editorcss.session.setMode('ace/mode/css');
-      editorcss.setOption('enableEmmet', true);
-      editorcss.setOptions({
-        enableBasicAutocompletion: true,
-        enableSnippets: true,
-        enableLiveAutocompletion: true,
+      let editorCSS;
+      require.config({
+        paths: { vs: 'https://unpkg.com/monaco-editor@latest/min/vs' },
+      });
+      window.MonacoEnvironment = { getWorkerUrl: () => proxy };
+
+      let proxy = URL.createObjectURL(
+        new Blob(
+          [
+            `
+      self.MonacoEnvironment = {
+      baseUrl: 'https://unpkg.com/monaco-editor@latest/min/'
+      };
+      importScripts('https://unpkg.com/monaco-editor@latest/min/vs/base/worker/workerMain.js');
+      `,
+          ],
+          { type: 'text/javascript' }
+        )
+      );
+
+      require(['vs/editor/editor.main'], function () {
+        editorCSS = monaco.editor.create(document.getElementById('cssEdit'), {
+          value: [
+            `body{
+            color: rgb(0, 0, 0);
+          }`,
+          ].join('\n'),
+          language: 'css',
+          theme: 'vs-dark',
+        });
       });
 
       function iframeUpdate() {
         document.getElementById('view').src = `/page.html?u=${
           document.getElementById('userInput').innerHTML
-        }&style=${editorcss.getValue()}`;
+        }&style=${editorCSS.getValue()}`;
       }
     </script>
   </body>
