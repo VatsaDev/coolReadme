@@ -13,11 +13,21 @@
     <link rel="stylesheet" href="default.css" />
     <link rel="stylesheet" href="editor.css" />
     <link rel="shortcut icon" href="markdown.svg" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="https://unpkg.com/monaco-editor@latest/min/vs/loader.js"></script>
   </head>
   <body>
     <div id="userbar">
       Username: <u><span id="userInput" contenteditable>Example</span></u>
+      <a href="#" id="link"
+        ><i class="fa-solid fa-link fa-lg" style="color: #cac4c4"></i
+      ></a>
     </div>
     <div id="cssEdit" onkeyup="iframeUpdate()"></div>
     <iframe id="view" src="" title="page preview"></iframe>
@@ -55,9 +65,10 @@
       });
 
       function iframeUpdate() {
-        document.getElementById('view').src = `/page.html?u=${
+        document.getElementById('view').src && x = `/page.html?u=${
           document.getElementById('userInput').innerHTML
         }&style=${editorCSS.getValue()}`;
+        console.log(x)
       }
     </script>
   </body>
