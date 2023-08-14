@@ -7,11 +7,19 @@
     <link rel="stylesheet" href="default.css" />
   </head>
   <body>
-    <main>
+    <main style="text-align: center">
       <h1>Welcome to Cool Readme!</h1>
       <h2>Turn your readme into a webpage!</h2>
       <p>To see your readme, enter your github username</p>
-      <input type="text" id="" />
+      <input type="text" id="user" />
+      <button onclick="send()">Check it out!</button>
     </main>
+    <script>
+      function send() {
+        window.location.href = `/page.html?u=${
+          document.getElementById('user').value
+        }`;
+      }
+    </script>
   </body>
 </html>
