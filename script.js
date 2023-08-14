@@ -4,7 +4,6 @@ const urlParams = new URLSearchParams(queryString);
 
 function convert(text) {
   var html = converter.makeHtml(text);
-  console.log(html);
   document.getElementById('content').innerHTML = html;
 }
 
@@ -19,11 +18,12 @@ async function fetchReadme() {
 
 async function settings() {
   const u = urlParams.get('u');
-  fetch(`https://raw.githubusercontent.com/${u}/${u}/master/set.json`)
-    .then((response) => response.text())
+  fetch(`https://raw.githubusercontent.com/vatsadev/vatsadev/master/set.json`)
+    .then((response) => response)
     .then((result) => {
       console.log(result);
     });
 }
 
 fetchReadme();
+settings();
