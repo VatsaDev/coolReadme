@@ -19,3 +19,8 @@ h2 {
 h3 {
   font-size: 2rem;
 }
+
+#content {
+  width: 80%;
+  margin: auto;
+}

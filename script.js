@@ -1,6 +1,11 @@
 const queryString = window.location.search;
 var converter = new showdown.Converter();
 const urlParams = new URLSearchParams(queryString);
+const u = urlParams.get('u');
+
+function setup() {
+  document.getElementById('userName').innerHTML = `@${u}`;
+}
 
 function convert(text) {
   var html = converter.makeHtml(text);
@@ -8,7 +13,6 @@ function convert(text) {
 }
 
 async function fetchReadme() {
-  const u = urlParams.get('u');
   fetch(`https://raw.githubusercontent.com/${u}/${u}/master/README.md`)
     .then((response) => response.text())
     .then((result) => {
@@ -17,7 +21,6 @@ async function fetchReadme() {
 }
 
 async function settings() {
-  const u = urlParams.get('u');
   fetch(`https://raw.githubusercontent.com/vatsadev/vatsadev/master/set.json`)
     .then((response) => response)
     .then((result) => {
@@ -25,5 +28,6 @@ async function settings() {
     });
 }
 
+setup();
 fetchReadme();
-settings();
+settings(); // not working
