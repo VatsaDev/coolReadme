@@ -9,18 +9,29 @@
   </head>
   <body>
     <main style="text-align: center">
-      <h1>Welcome to Cool Readme!</h1>
+      <h1 id="title">Cool Readme!</h1>
       <h2>Turn your readme into a webpage!</h2>
       <p>To see your readme, enter your github username</p>
-      <input type="text" id="user" />
-      <button onclick="send()">Check it out!</button>
+      <input type="text" id="user" placeholder="..." /><br /><br />
+      <button onclick="send()" id="send">Check it out!</button>
     </main>
+    <footer>
+      <p>
+        Copyright Vatsa 2023-<span id="copy"></span>, all rights reserved.
+        <br />
+        Star us on <a href="https://github.com/VatsaDev/coolMD">Github</a>
+        <strong>ˏˋ ☆ ˎˊ</strong>
+      </p>
+      <br /><br />
+    </footer>
     <script>
       function send() {
         window.location.href = `/page.html?u=${
           document.getElementById('user').value
         }`;
       }
+
+      document.getElementById('copy').innerHTML = new Date().getFullYear();
     </script>
   </body>
 </html>
