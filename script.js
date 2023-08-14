@@ -5,6 +5,7 @@ const u = urlParams.get('u');
 const style = urlParams.get('style');
 
 function setup() {
+  document.title = u;
   document.getElementById('userName').innerHTML = `@${u}`;
 }
 
