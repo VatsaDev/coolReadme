@@ -22,6 +22,7 @@
     />
     <script src="https://unpkg.com/monaco-editor@latest/min/vs/loader.js"></script>
   </head>
+
   <body>
     <div id="userbar">
       Username: <u><span id="userInput" contenteditable>Example</span></u>
@@ -65,10 +66,12 @@
       });
 
       function iframeUpdate() {
-        document.getElementById('view').src && x = `/page.html?u=${
+        document.getElementById('view').src = `/page.html?u=${
           document.getElementById('userInput').innerHTML
         }&style=${editorCSS.getValue()}`;
-        console.log(x)
+        document.getElementById('link').href = `/page.html?u=${
+          document.getElementById('userInput').innerHTML
+        }&style=${editorCSS.getValue()}`;
       }
     </script>
   </body>
