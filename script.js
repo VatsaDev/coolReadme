@@ -17,4 +17,13 @@ async function fetchReadme() {
     });
 }
 
+async function settings() {
+  const u = urlParams.get('u');
+  fetch(`https://raw.githubusercontent.com/${u}/${u}/master/set.json`)
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result);
+    });
+}
+
 fetchReadme();
